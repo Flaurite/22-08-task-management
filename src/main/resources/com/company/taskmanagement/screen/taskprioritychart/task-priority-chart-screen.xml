@@ -3,42 +3,28 @@
         caption="msg://taskPriorityChartScreen.caption"
         xmlns:chart="http://jmix.io/schema/ui/charts">
     <data>
-<!--        <keyValueCollection id="tasksDc">-->
-<!--            <loader id="tasksDl">-->
-<!--                <query>-->
-<!--                    <![CDATA[select e.priority, count(e.priority) from tm_Task e-->
-<!--                            group by e.priority]]>-->
-<!--                </query>-->
-<!--            </loader>-->
-<!--            <properties>-->
-<!--                <property name="priority"-->
-<!--                          class="com.company.taskmanagement.entity.TaskPriority"/>-->
-<!--                <property name="count" datatype="integer"/>-->
-<!--            </properties>-->
-<!--        </keyValueCollection>-->
+        <keyValueCollection id="tasksDc">
+            <loader id="tasksDl">
+                <query>
+                    <![CDATA[select e.priority, count(e) from tm_Task e
+                            group by e.priority]]>
+                </query>
+            </loader>
+            <properties>
+                <property name="priority"/>
+                <property name="count" datatype="int"/>
+            </properties>
+        </keyValueCollection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
     </facets>
     <layout expand="taskPriorityChart">
         <chart:pieChart id="taskPriorityChart"
+                        dataContainer="tasksDc"
                         titleField="priority"
                         valueField="count"
                         width="100%">
-            <chart:data>
-                <chart:item>
-                    <chart:property name="priority" value="LOW"/>
-                    <chart:property name="count" value="10"/>
-                </chart:item>
-                <chart:item>
-                    <chart:property name="priority" value="HIGH"/>
-                    <chart:property name="count" value="3"/>
-                </chart:item>
-                <chart:item>
-                    <chart:property name="priority" value="MEDIUM"/>
-                    <chart:property name="count" value="8"/>
-                </chart:item>
-            </chart:data>
         </chart:pieChart>
     </layout>
 </window>
